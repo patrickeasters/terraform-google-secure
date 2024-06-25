@@ -77,7 +77,7 @@ resource "google_logging_project_sink" "ingestion_sink" {
   # NOTE: The target destination is a PubSub topic
   destination = "pubsub.googleapis.com/projects/${var.project_id}/topics/${google_pubsub_topic.ingestion_topic.name}"
 
-  filter = "protoPayload.@type = \"type.googleapis.com/google.cloud.audit.AuditLog\""
+  filter = var.log_filter
 
   # NOTE: Used to create a dedicated writer identity and not using the default one
   unique_writer_identity = true

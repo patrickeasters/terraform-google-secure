@@ -42,7 +42,7 @@ resource "google_logging_organization_sink" "ingestion_sink" {
 
   # NOTE: The target destination is a PubSub topic
   destination = "pubsub.googleapis.com/projects/${var.project_id}/topics/${google_pubsub_topic.ingestion_topic.name}"
-  filter      = "protoPayload.@type = \"type.googleapis.com/google.cloud.audit.AuditLog\""
+  filter      = var.log_filter
 
   # NOTE: The include_children attribute is set to true in order to ingest data
   # even from potential sub-organizations
